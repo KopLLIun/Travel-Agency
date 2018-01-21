@@ -1,6 +1,8 @@
 package com.epam.travelagency.entity;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -17,8 +19,27 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column
     private String address;
+
+    private String login;
+
+    private String password;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Contract> contracts;
+
+    @ManyToMany
+    @JoinTable(name = "customer_roles", joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
 
     public Customer() {
 
@@ -54,6 +75,30 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

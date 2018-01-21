@@ -1,6 +1,7 @@
 package com.epam.travelagency.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "country")
@@ -12,10 +13,11 @@ public class Country {
 
     private String name;
 
-    @Column(name = "city_name")
-    private String cityName;
+    @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
+    private List<City> cities;
 
-    private String language;
+    @OneToMany(mappedBy = "country")
+    private List<Tour> tours;
 
     public Country() {
 
@@ -37,29 +39,36 @@ public class Country {
         this.name = name;
     }
 
-    public String getCityName() {
-        return cityName;
+    public List<City> getCities() {
+        return cities;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 
-    public String getLanguage() {
-        return language;
+    public List<Tour> getTours() {
+        return tours;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setTours(List<Tour> tours) {
+        this.tours = tours;
     }
 
     @Override
     public String toString() {
+        String city = "";
+        if ((cities != null) && (cities.size() > 0)) {
+            for (int i = 0; i < cities.size(); i++) {
+                if (i > 0)
+                    city += ",";
+                city += cities.get(i).toString();
+            }
+        }
         return "Country{" +
                 "countryID=" + id +
                 ", countryName='" + name + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", language='" + language + '\'' +
+                ", cities =[" + city + "]" +
                 '}';
     }
 }

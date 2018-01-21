@@ -2,6 +2,8 @@ package com.epam.travelagency.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tour")
@@ -19,6 +21,28 @@ public class Tour {
     private Integer duration;
     private Integer cost;
     private String description;
+
+    @OneToMany(mappedBy = "tour")
+    private List<Contract> orders;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "transport_id")
+    private Transport transport;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
+
+/*    @ManyToMany(mappedBy = "tours")
+    private List<Hotel> hotels;*/
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id")
+    private Country country;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public Tour() {
 
@@ -80,6 +104,54 @@ public class Tour {
         this.type = TourType.valueOf(tourType);
     }
 
+    public List<Contract> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Contract> orders) {
+        this.orders = orders;
+    }
+
+    public Transport getTransport() {
+        return transport;
+    }
+
+    public void setTransport(Transport transport) {
+        this.transport = transport;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    /*    public List<Hotel> getHotels() {
+        return hotels;
+    }
+
+    public void setHotels(List<Hotel> hotels) {
+        this.hotels = hotels;
+    }*/
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     @Override
     public String toString() {
         return "Tour{" +
@@ -89,7 +161,7 @@ public class Tour {
                 ", tourDuration=" + duration +
                 ", cost=" + cost +
                 ", description='" + description + '\'' +
-                ", toutType" + type +
+                ", toutType=" + type +
                 '}';
     }
 }

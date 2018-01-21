@@ -1,6 +1,7 @@
 package com.epam.travelagency.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "transport")
@@ -12,6 +13,9 @@ public class Transport {
 
     @Enumerated(EnumType.STRING)
     private TransportType type;
+
+    @OneToMany(mappedBy = "transport", fetch = FetchType.EAGER)
+    private List<Tour> tours;
 
     public Transport() {
 
@@ -31,6 +35,14 @@ public class Transport {
 
     public void setType(String type) {
         this.type = TransportType.valueOf(type);
+    }
+
+    public List<Tour> getTours() {
+        return tours;
+    }
+
+    public void setTours(List<Tour> tours) {
+        this.tours = tours;
     }
 
     @Override

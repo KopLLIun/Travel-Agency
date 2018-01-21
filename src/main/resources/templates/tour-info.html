@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <title>Иформация о туре</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/tours">Туры</a></li>
+                <li><a href="/hotels">Отели</a></li>
+                <li class="active"><a href="/countries">Страны</a></li>
+                <li><a href="/blog">Блог</a></li>
+                <li><a href="/contracts">Заказы</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+
+<div class="col-sm-8 text-left">
+    <table>
+        <caption><h1><b>Туры</b></h1></caption>
+
+        <thead>
+        <tr>
+            <th><b>Страна</b></th>
+            <th><b>Город</b></th>
+            <th><b>Название отеля</b></th>
+            <th><b>Адресс</b></th>
+            <th><b>Кол-во звёзд</b></th>
+            <th><b>Еда</b></th>
+            <th><b>Тип транспорта</b></th>
+            <th><b>Оформить</b></th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td th:utext="${tour_info.getCountry().name}"></td>
+                <td th:utext="${tour_info.getCity().name}"></td>
+                <td th:utext="${tour_info.name}"></td>
+                <td th:utext="${tour_info.getHotel().name}"></td>
+                <td th:utext="${tour_info.getHotel().starNumbers}"></td>
+                <td th:utext="${tour_info.getHotel().meals}"></td>
+                <td th:utext="${tour_info.getTransport().type}"></td>
+                <td>
+                    <form action="#" th:action="@{/contracts/buy(id=${tour_info.id})}" th:object="${tour_info}" method="post">
+                    <button type="submit" class="btn btn-success">Оформить</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+</body>
+</html>

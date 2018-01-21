@@ -1,0 +1,29 @@
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+.row.content {
+    height: 450px
+}
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+@media screen and (max-width: 767px) {
+    .row.content {
+        height: auto;
+    }
+}
+th{
+    text-align: center;
+}
+td{
+    width: 60px;
+    height:60px;
+    border: solid 1px silver;
+    text-align:center;
+}
+#myNavbar{
+    font-size: 15pt;
+}

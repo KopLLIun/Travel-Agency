@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+    <title>Туры</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Главная</a></li>
+                <li class="active"><a href="/tours">Туры</a></li>
+                <li><a href="/hotels">Отели</a></li>
+                <li><a href="/countries">Страны</a></li>
+                <li><a href="/blog">Блог</a></li>
+                <li><a href="/contracts">Заказы</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+
+<div class="col-md-10 text-left">
+    <table>
+        <caption><h1><b>Туры</b></h1></caption>
+
+        <thead>
+            <tr>
+                <th><b>Название тура</b></th>
+                <th><b>Тип тура</b></th>
+                <th><b>Описание</b></th>
+                <th><b>Дата отправки</b></th>
+                <th><b>Длительность</b></th>
+                <th><b>Стоимость тура</b></th>
+                <th><b>Выбрать</b></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tour: ${tours}">
+                <td th:utext="${tour.name}"></td>
+                <td th:utext="${tour.tourType}"></td>
+                <td th:utext="${tour.description}"></td>
+                <td th:utext="${tour.date}"></td>
+                <td th:utext="${tour.duration}"></td>
+                <td th:utext="${tour.getTransport().type}"></td>
+                <td><a th:href="@{/tours/tour-info(id=${tour.id})}">Выбрать</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

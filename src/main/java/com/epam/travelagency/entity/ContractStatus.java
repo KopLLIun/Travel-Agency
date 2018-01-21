@@ -1,6 +1,6 @@
 package com.epam.travelagency.entity;
 
-public enum OrderStatus {
+public enum ContractStatus {
     IN_PROCESS,
     COMPLETED,
     DENIED

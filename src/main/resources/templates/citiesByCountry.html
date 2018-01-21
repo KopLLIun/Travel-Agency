@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <title>Города</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/tours">Туры</a></li>
+                <li><a href="/hotels">Отели</a></li>
+                <li class="active"><a href="/countries">Страны</a></li>
+                <li><a href="/blog">Блог</a></li>
+                <li><a href="/contracts">Заказы</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+
+<div>
+    <table>
+        <caption th:utext="${country.name}"></caption>
+
+        <thead>
+        <tr>
+            <th>Город</th>
+            <th>Язык</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="city:${country.getCities()}">
+            <td th:utext="${city.name}"></td>
+            <td th:utext="${city.language}"></td>
+            <td><a th:href="@{'/countries/' + ${country.name} + '/' + ${city.name}}">Выбрать</a> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

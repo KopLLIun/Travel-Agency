@@ -1,4 +1,4 @@
-package com.epam.travelagency;
+package com.epam.travelagency.controler;
 
 import com.epam.travelagency.entity.Customer;
 import com.epam.travelagency.repository.CustomerRepository;
